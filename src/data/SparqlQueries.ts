@@ -292,7 +292,7 @@ CONSTRUCT {
     ] . }
   OPTIONAL { ?proj okh:release ?proj_release_url . }
 
-  FILTER regex(?name, "loom", "i")
+  FILTER regex(?name, "${projectName}", "i")
 }
 LIMIT 100
     `;
