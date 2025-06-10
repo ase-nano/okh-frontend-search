@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header.tsx";
 
 const SparqlResultTable: FC = () => {
     const location = useLocation();
@@ -35,37 +36,40 @@ const SparqlResultTable: FC = () => {
 
     return (
         <>
-            <Button onClick={() => navigate('/')}>Go to Search</Button>
+            <Header />
+            <div className="container mx-auto">
+                <Button onClick={() => navigate('/')}>Go to Search</Button>
 
-            {
-                data.headers.length && (
-                    <Table className="table-auto text-wrap">
-                        <TableCaption>Results ({data.rows.length})</TableCaption>
-                        <TableHeader>
-                            <TableRow>
+                {
+                    data.headers.length && (
+                        <Table className="table-auto text-wrap">
+                            <TableCaption>Results ({data.rows.length})</TableCaption>
+                            <TableHeader>
+                                <TableRow>
+                                    {
+                                        data.headers.map((header: string) => (
+                                            <TableHead key={header} className="w-1/5 text-wrap">{getMappedHeaderName(header)}</TableHead>
+                                        ))
+                                    }
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
                                 {
-                                    data.headers.map((header: string) => (
-                                        <TableHead key={header} className="w-1/5 text-wrap">{getMappedHeaderName(header)}</TableHead>
+                                    data.rows.map((row, rIndex) => (
+                                        <TableRow key={rIndex}>
+                                            {
+                                                Object.values(row).map((value, vIndex) => (
+                                                    <TableCell key={vIndex} className="w-1/5 text-wrap">{value}</TableCell>
+                                                ))
+                                            }
+                                        </TableRow>
                                     ))
                                 }
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {
-                                data.rows.map((row, rIndex) => (
-                                    <TableRow key={rIndex}>
-                                        {
-                                            Object.values(row).map((value, vIndex) => (
-                                                <TableCell key={vIndex} className="w-1/5 text-wrap">{value}</TableCell>
-                                            ))
-                                        }
-                                    </TableRow>
-                                ))
-                            }
-                        </TableBody>
-                    </Table>
-                )
-            }
+                            </TableBody>
+                        </Table>
+                    )
+                }
+            </div>
         </>
     );
 };

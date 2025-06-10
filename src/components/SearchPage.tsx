@@ -11,6 +11,7 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu.tsx";
 import { headerMap } from "@/helper/transform-functions.ts";
+import Header from "@/components/Header.tsx";
 
 const SearchPage: FC = () => {
     const navigate = useNavigate();
@@ -64,45 +65,58 @@ const SearchPage: FC = () => {
 
     return (
         <>
-            <div className="p-6 max-w-4xl mx-auto">
-                <h1 className="text-2xl font-bold mb-6">OKH Search</h1>
+            <div className="bg-image-full"></div>
+            <Header />
 
-                <form onSubmit={handleSubmit} className="mb-6">
-                    <div className="flex">
-                        <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Button variant="outline">
-                                    <Funnel size={20} strokeWidth={1}/>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                                <DropdownMenuLabel>Search in</DropdownMenuLabel>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuRadioGroup value={selectedSearchColumn} onValueChange={setSelectedSearchColumn}>
-                                    {
-                                        Object.keys(headerMap).map((key: string) =>
-                                            <DropdownMenuRadioItem key={key} value={key}>{headerMap[key]}</DropdownMenuRadioItem>
-                                        )
-                                    }
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+            <div className="container mx-auto">
+                <div className="p-6 max-w-2xl mx-auto" style={{paddingTop: "18rem"}}>
+                    <h1 className="text-5xl font-bold mb-6">OKH Search</h1>
 
-                        <Input
-                            type="text"
-                            value={query}
-                            onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Enter search term..."/>
+                    <form onSubmit={handleSubmit} className="mb-6">
+                        <div className="flex">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant={"secondary"} size={"lg"}>
+                                        <Funnel size={20} strokeWidth={1} />
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    <DropdownMenuLabel>Search in</DropdownMenuLabel>
+                                    <DropdownMenuSeparator/>
+                                    <DropdownMenuRadioGroup value={selectedSearchColumn}
+                                                            onValueChange={setSelectedSearchColumn}>
+                                        {
+                                            Object.keys(headerMap).map((key: string) =>
+                                                <DropdownMenuRadioItem key={key} value={key}>{headerMap[key]}</DropdownMenuRadioItem>
+                                            )
+                                        }
+                                    </DropdownMenuRadioGroup>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
 
-                        <Button type='submit' disabled={loading}>{loading ? 'Searching...' : 'Search'}</Button>
-                    </div>
-                </form>
+                            <Input
+                                type="text"
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                                className="bg-background5 ml-2 mr-2 h-10"
+                                placeholder="Enter search term..."/>
 
-                {error && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                        {error}
-                    </div>
-                )}
+                            <Button
+                                type='submit'
+                                variant={"secondary"}
+                                size={"lg"}
+                                disabled={loading}>
+                                {loading ? 'Searching...' : 'Search'}
+                            </Button>
+                        </div>
+                    </form>
+
+                    {error && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                            {error}
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     );

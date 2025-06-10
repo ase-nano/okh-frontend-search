@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1382.7975"
+   height="202.79111"
+   viewBox="0 0 365.86525 53.655116"
+   version="1.1"
+   id="svg4"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4">
+    <rect
+       x="269.91586"
+       y="6.0217447"
+       width="2015.8676"
+       height="195.7067"
+       id="rect4" />
+  </defs>
+  <path
+     d="m 56.990771,28.184015 c 1.869541,0 11.268093,-5.425778 12.203945,-7.045398 0.93477,-1.619619 0.93477,-12.4722582 0,-14.0918775 C 68.258864,5.4271202 58.860312,2.5967e-4 56.990771,2.5967e-4 c -1.870622,0 -11.269174,5.42686053 -12.203944,7.04647983 -0.934771,1.6196193 -0.934771,12.4722585 0,14.0918775 0.93477,1.61962 10.333322,7.045398 12.203944,7.045398 z"
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#d7cc84;fill-opacity:1;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:1.7;paint-order:fill markers stroke;enable-background:accumulate;stop-color:#000000"
+     id="path1" />
+  <path
+     d="m 42.516771,54.030015 c 1.869541,0 11.268093,-5.425778 12.203945,-7.045398 0.93477,-1.619619 0.93477,-12.472258 0,-14.091878 C 53.784864,31.27312 44.386312,25.84626 42.516771,25.84626 c -1.870622,0 -11.269174,5.42686 -12.203944,7.046479 -0.934771,1.61962 -0.934771,12.472259 0,14.091878 0.93477,1.61962 10.333322,7.045398 12.203944,7.045398 z"
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#85d7bd;fill-opacity:1;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:1.7;paint-order:fill markers stroke;enable-background:accumulate;stop-color:#000000"
+     id="path2" />
+  <path
+     d="m 27.378771,28.184015 c 1.869541,0 11.268093,-5.425778 12.203945,-7.045398 0.93477,-1.619619 0.93477,-12.4722582 0,-14.0918775 C 38.646864,5.4271202 29.248312,2.5967e-4 27.378771,2.5967e-4 c -1.870622,0 -11.269174,5.42686053 -12.203944,7.04647983 -0.934771,1.6196193 -0.934771,12.4722585 0,14.0918775 0.93477,1.61962 10.333322,7.045398 12.203944,7.045398 z"
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#84d787;fill-opacity:1;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:1.7;paint-order:fill markers stroke;enable-background:accumulate;stop-color:#000000"
+     id="path3" />
+  <path
+     d="m 12.905771,54.030015 c 1.869541,0 11.268093,-5.425778 12.203945,-7.045398 0.93477,-1.619619 0.93477,-12.472258 0,-14.091878 C 24.173864,31.27312 14.775312,25.84626 12.905771,25.84626 c -1.870622,0 -11.2691742,5.42686 -12.20394445,7.046479 -0.93477024,1.61962 -0.93477024,12.472259 0,14.091878 0.93477025,1.61962 10.33332245,7.045398 12.20394445,7.045398 z"
+     style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#d7cc84;fill-opacity:1;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:1.7;paint-order:fill markers stroke;enable-background:accumulate;stop-color:#000000"
+     id="path4" />
+  <text
+     xml:space="preserve"
+     transform="matrix(0.26458329,0,0,0.26458329,5.2700145,9.2177931)"
+     id="text4"
+     style="font-size:96px;line-height:1.25;font-family:Oxanium;-inkscape-font-specification:Oxanium;text-align:start;text-decoration-color:#000000;letter-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect4);display:inline;fill:#000000"><tspan
+       x="269.91602"
+       y="94.866555"
+       id="tspan2"><tspan
+         style="font-weight:300;font-family:Inter;-inkscape-font-specification:'Inter Light';fill:#052b33"
+         id="tspan1">Open Search Ecosystem</tspan></tspan></text>
+</svg>
