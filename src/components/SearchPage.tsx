@@ -1,16 +1,23 @@
 import { FC, useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
-import { fetchGraphForProjectName } from '@/data/SparqlQueries';
+import { fetchGraph } from '@/data/SparqlQueries';
 import { SparqlResult } from '@/models/SparqlResult';
 import { useNavigate } from 'react-router-dom';
-
+import { Funnel } from "lucide-react";
+import {
+    DropdownMenu,
+    DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu.tsx";
+import { headerMap } from "@/helper/transform-functions.ts";
 
 const SearchPage: FC = () => {
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [selectedSearchColumn, setSelectedSearchColumn] = useState('name');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -20,12 +27,11 @@ const SearchPage: FC = () => {
             return;
         }
 
-        // Clear previous results and errors
         setError(null);
         setLoading(true);
 
         try {
-            const sparqlQuery = fetchGraphForProjectName(query);
+            const sparqlQuery = fetchGraph(selectedSearchColumn, query);
             const fusekiEndpoint = 'https://okh-db.dev.opensourceecology.de/okh/sparql';
 
             const response = await fetch(fusekiEndpoint, {
@@ -46,11 +52,11 @@ const SearchPage: FC = () => {
             console.log('received data', data);
 
             if (data.results && data.results.bindings) {
-                navigate('/result-table', { state: data });
+                navigate('/result-table', {state: data});
             }
 
-        } catch (err) {
-            setError(`Error: ${(err as any).message}`);
+        } catch (err: unknown) {
+            setError(`Error: ${err}`);
         } finally {
             setLoading(false);
         }
@@ -63,11 +69,31 @@ const SearchPage: FC = () => {
 
                 <form onSubmit={handleSubmit} className="mb-6">
                     <div className="flex">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <Button variant="outline">
+                                    <Funnel size={20} strokeWidth={1}/>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuLabel>Search in</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuRadioGroup value={selectedSearchColumn} onValueChange={setSelectedSearchColumn}>
+                                    {
+                                        Object.keys(headerMap).map((key: string) =>
+                                            <DropdownMenuRadioItem key={key} value={key}>{headerMap[key]}</DropdownMenuRadioItem>
+                                        )
+                                    }
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
                         <Input
                             type="text"
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
-                            placeholder="Enter search term..." />
+                            placeholder="Enter search term..."/>
+
                         <Button type='submit' disabled={loading}>{loading ? 'Searching...' : 'Search'}</Button>
                     </div>
                 </form>

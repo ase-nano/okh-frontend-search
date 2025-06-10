@@ -298,7 +298,7 @@ LIMIT 100
     `;
 };
 
-export const fetchGraphForProjectName = (projectName: string) => {
+export const fetchGraph = (selectedSearchColumn: string, projectName: string) => {
     return `
 # SPDX-FileCopyrightText: 2025 Robin Vobruba <hoijui.quaero@gmail.com>
 #
@@ -395,7 +395,7 @@ WHERE {
 
 #  ?proj text:query (okh:name "${projectName}") .
 #  FILTER regex(?name, "${projectName}", "i")
-  FILTER CONTAINS(?name, "${projectName}")
+  FILTER CONTAINS(STR(?${selectedSearchColumn}), "${projectName}")
 }
 LIMIT 100
     `;
