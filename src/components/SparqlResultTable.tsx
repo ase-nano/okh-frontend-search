@@ -18,7 +18,7 @@ const SparqlResultTable: FC = () => {
         } else {
             setLoading(true);
         }
-    }, [location.state]);
+    }, [location]);
 
     if (loading) {
         return <div>Loading...</div>

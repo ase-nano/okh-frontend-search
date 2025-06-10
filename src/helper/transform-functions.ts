@@ -47,7 +47,7 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
     };
 };
 
-const HeaderMap: Record<string, string> = {
+export const headerMap: Record<string, string> = {
     name: 'Name',
     src_license: 'Source License',
     src_licensor: 'Source Licensor',
@@ -61,5 +61,5 @@ const HeaderMap: Record<string, string> = {
 };
 
 export const getMappedHeaderName = (dbHeader: string): string => {
-    return HeaderMap[dbHeader];
+    return headerMap[dbHeader];
 };
