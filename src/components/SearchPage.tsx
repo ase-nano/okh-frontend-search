@@ -3,14 +3,12 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { fetchGraphForProjectName } from '@/data/SparqlQueries';
 import { SparqlResult } from '@/models/SparqlResult';
-import SparqlResultTable from './SparqlResultTable';
 import { useNavigate } from 'react-router-dom';
 
 
 const SearchPage: FC = () => {
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
-    const [sparqlResponse, setSparqlResponse] = useState<SparqlResult | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +21,6 @@ const SearchPage: FC = () => {
         }
 
         // Clear previous results and errors
-        setSparqlResponse(null);
         setError(null);
         setLoading(true);
 
@@ -47,13 +44,11 @@ const SearchPage: FC = () => {
             const data: SparqlResult = await response.json();
 
             console.log('received data', data);
-            // Process the SPARQL results
+
             if (data.results && data.results.bindings) {
-                setSparqlResponse(data);
                 navigate('/result-table', { state: data });
-            } else {
-                setSparqlResponse(null);
             }
+
         } catch (err) {
             setError(`Error: ${(err as any).message}`);
         } finally {
