@@ -1,4 +1,4 @@
 export interface TableData {
     headers: string[];
-    rows: string[];
+    rows: Record<string, string>[];
 }

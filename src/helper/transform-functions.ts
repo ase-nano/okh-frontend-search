@@ -2,6 +2,7 @@ import { SparqlResult } from "@/models/SparqlResult";
 import { TableData } from "@/models/Table";
 
 const tableHeadersToUse = [
+    'proj_img_url',
     'name',
     'src_license',
     'src_licensor',
@@ -31,7 +32,12 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
                 row[header] = binding[header].value;
 
                 if (header.includes('license')) {
-                    row[header] = binding[header].value.split('#')[1];
+                    const licenseSplit = binding[header].value.split('/');
+                    row[header] = licenseSplit[licenseSplit.length - 1];
+                }
+                if (header.includes('readiness_level')) {
+                    const licenseSplit = binding[header].value.split('#');
+                    row[header] = licenseSplit[licenseSplit.length - 1];
                 }
             } else {
                 row[header] = null;
@@ -41,6 +47,8 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
         return row;
     });
 
+    console.log('transformDataForTable', { headers, rows });
+
     return {
         headers,
         rows
@@ -48,6 +56,7 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
 };
 
 export const headerMap: Record<string, string> = {
+    proj_img_url: 'Preview',
     name: 'Name',
     src_license: 'Source License',
     src_licensor: 'Source Licensor',

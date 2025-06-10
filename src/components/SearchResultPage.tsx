@@ -1,12 +1,12 @@
-import { getMappedHeaderName, transformDataForTable } from "@/helper/transform-functions";
+import { transformDataForTable } from "@/helper/transform-functions";
 import { TableData } from "@/models/Table";
 import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header.tsx";
+import SearchResultItem from "@/components/SearchResultItem.tsx";
 
-const SparqlResultTable: FC = () => {
+const SearchResultPage: FC = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const [data, setData] = useState<TableData | null>(null);
@@ -29,7 +29,7 @@ const SparqlResultTable: FC = () => {
         return (
             <div>
                 <p>No data available. Please search first.</p>
-                <Button onClick={() => navigate('/')}>Go to Search</Button>
+                <Button onClick={() => navigate('/')}>Back to Search</Button>
             </div>
         )
     }
@@ -38,9 +38,15 @@ const SparqlResultTable: FC = () => {
         <>
             <Header />
             <div className="container mx-auto">
-                <Button onClick={() => navigate('/')}>Go to Search</Button>
+                <div className="mb-6">
+                    <Button onClick={() => navigate('/')}>Back to Search</Button>
+                </div>
 
                 {
+                    data.rows.map((row, index) => <SearchResultItem key={index} row={row} />)
+                }
+
+                {/**
                     data.headers.length && (
                         <Table className="table-auto text-wrap">
                             <TableCaption>Results ({data.rows.length})</TableCaption>
@@ -59,7 +65,7 @@ const SparqlResultTable: FC = () => {
                                         <TableRow key={rIndex}>
                                             {
                                                 Object.values(row).map((value, vIndex) => (
-                                                    <TableCell key={vIndex} className="w-1/5 text-wrap">{value}</TableCell>
+                                                    <TableCell key={vIndex} className="w-1/5 text-wrap">{value as string}</TableCell>
                                                 ))
                                             }
                                         </TableRow>
@@ -68,10 +74,10 @@ const SparqlResultTable: FC = () => {
                             </TableBody>
                         </Table>
                     )
-                }
+                */}
             </div>
         </>
     );
 };
 
-export default SparqlResultTable;
+export default SearchResultPage;
