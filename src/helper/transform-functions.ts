@@ -49,7 +49,7 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
 
 const HeaderMap: Record<string, string> = {
     name: 'Name',
-    src_license: 'Source Licensor',
+    src_license: 'Source License',
     src_licensor: 'Source Licensor',
     proj_license: 'Project License',
     proj_licensor: 'Project Licensor',

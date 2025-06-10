@@ -83,8 +83,6 @@ const SearchPage: FC = () => {
                     </div>
                 )}
             </div>
-
-            {sparqlResponse?.head.vars.length ?? (<SparqlResultTable />)}
         </>
     );
 }
