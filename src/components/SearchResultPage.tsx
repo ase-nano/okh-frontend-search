@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header.tsx";
 import SearchResultItem from "@/components/SearchResultItem.tsx";
 import SearchResultSidebar from "@/components/SearchResultSidebar.tsx";
+import { ArrowLeft } from "lucide-react";
 
 const SearchResultPage: FC = () => {
     const location = useLocation();
@@ -32,7 +33,7 @@ const SearchResultPage: FC = () => {
         return (
             <div>
                 <p>No data available. Please search first.</p>
-                <Button onClick={() => navigate('/')}>Back to Search</Button>
+                <Button variant={"secondary"} onClick={() => navigate('/')}><ArrowLeft /> Back to Search</Button>
             </div>
         )
     }
