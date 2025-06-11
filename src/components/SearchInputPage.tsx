@@ -13,7 +13,7 @@ import {
 import { headerMap } from "@/helper/transform-functions.ts";
 import Header from "@/components/Header.tsx";
 
-const SearchPage: FC = () => {
+const SearchInputPage: FC = () => {
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
@@ -22,6 +22,8 @@ const SearchPage: FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const startTime = performance.now();
 
         if (!query.trim()) {
             setError('Please enter a search query');
@@ -48,12 +50,13 @@ const SearchPage: FC = () => {
                 throw new Error(`Fuseki server returned: ${response.status} ${response.statusText}`);
             }
 
+            const endTime = performance.now();
+            const duration = endTime - startTime;
+
             const data: SparqlResult = await response.json();
 
-            console.log('received data', data);
-
             if (data.results && data.results.bindings) {
-                navigate('/result-table', {state: data});
+                navigate('/result', {state: {data: data, requestDuration: Math.floor(duration)}});
             }
 
         } catch (err: unknown) {
@@ -66,7 +69,7 @@ const SearchPage: FC = () => {
     return (
         <>
             <div className="bg-image-full"></div>
-            <Header />
+            <Header/>
 
             <div className="container mx-auto">
                 <div className="p-6 max-w-2xl mx-auto" style={{paddingTop: "18rem"}}>
@@ -77,7 +80,7 @@ const SearchPage: FC = () => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant={"secondary"} size={"lg"}>
-                                        <Funnel size={20} strokeWidth={1} />
+                                        <Funnel size={20} strokeWidth={1}/>
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -87,7 +90,8 @@ const SearchPage: FC = () => {
                                                             onValueChange={setSelectedSearchColumn}>
                                         {
                                             Object.keys(headerMap).map((key: string) =>
-                                                <DropdownMenuRadioItem key={key} value={key}>{headerMap[key]}</DropdownMenuRadioItem>
+                                                <DropdownMenuRadioItem key={key}
+                                                                       value={key}>{headerMap[key]}</DropdownMenuRadioItem>
                                             )
                                         }
                                     </DropdownMenuRadioGroup>
@@ -122,4 +126,4 @@ const SearchPage: FC = () => {
     );
 }
 
-export default SearchPage;
+export default SearchInputPage;

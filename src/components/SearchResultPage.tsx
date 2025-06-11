@@ -5,16 +5,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header.tsx";
 import SearchResultItem from "@/components/SearchResultItem.tsx";
+import SearchResultSidebar from "@/components/SearchResultSidebar.tsx";
 
 const SearchResultPage: FC = () => {
     const location = useLocation();
     const navigate = useNavigate()
     const [data, setData] = useState<TableData | null>(null);
+    const [requestDuration, setRequestDuration] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (location && location.state) {
-            setData(transformDataForTable(location.state));
+            setData(transformDataForTable(location.state.data));
+            setRequestDuration(location.state.requestDuration);
             setLoading(false);
         } else {
             setLoading(true);
@@ -42,39 +45,16 @@ const SearchResultPage: FC = () => {
                     <Button onClick={() => navigate('/')}>Back to Search</Button>
                 </div>
 
-                {
-                    data.rows.map((row, index) => <SearchResultItem key={index} row={row} />)
-                }
-
-                {/**
-                    data.headers.length && (
-                        <Table className="table-auto text-wrap">
-                            <TableCaption>Results ({data.rows.length})</TableCaption>
-                            <TableHeader>
-                                <TableRow>
-                                    {
-                                        data.headers.map((header: string) => (
-                                            <TableHead key={header} className="w-1/5 text-wrap">{getMappedHeaderName(header)}</TableHead>
-                                        ))
-                                    }
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                {
-                                    data.rows.map((row, rIndex) => (
-                                        <TableRow key={rIndex}>
-                                            {
-                                                Object.values(row).map((value, vIndex) => (
-                                                    <TableCell key={vIndex} className="w-1/5 text-wrap">{value as string}</TableCell>
-                                                ))
-                                            }
-                                        </TableRow>
-                                    ))
-                                }
-                            </TableBody>
-                        </Table>
-                    )
-                */}
+                <div className="flex">
+                    <div className="w-4/5 mr-6">
+                        {
+                            data.rows.map((row, index) => <SearchResultItem key={index} row={row} />)
+                        }
+                    </div>
+                    <div className="w-1/5 ml-6">
+                        <SearchResultSidebar resultLength={data.rows.length} requestDuration={requestDuration} />
+                    </div>
+                </div>
             </div>
         </>
     );

@@ -12,7 +12,8 @@ const tableHeadersToUse = [
     'proj_documentation_language',
     'proj_version',
     'proj_technology_readiness_level',
-    'proj_documentation_readiness_level'
+    'proj_documentation_readiness_level',
+    'proj_release_url'
 ];
 
 export const transformDataForTable = (result: SparqlResult): TableData => {
