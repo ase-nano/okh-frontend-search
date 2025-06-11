@@ -1,5 +1,5 @@
 import { FC } from "react";
-import logoImgLight from '../assets/logos/ose_logo_light_1.svg';
+import logoImgLight from '../assets/logos/ose_logo_icon.svg';
 
 const Header: FC = () => {
     return (
@@ -7,7 +7,7 @@ const Header: FC = () => {
             <div className="w-auto">
                 <div className="flex flex-wrap items-center">
                     <div className="w-auto mr-14 text-neutral">
-                        <a href="https://osegermany.codeberg.page/OpenSearchEcosystem-Website/" className="flex items-center"><img
+                        <a href="/" className="flex items-center"><img
                             src={logoImgLight} alt="Logo"
                             className="h-[2em] mr-2"/></a>
                     </div>
