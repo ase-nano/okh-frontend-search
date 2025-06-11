@@ -57,16 +57,13 @@ export const transformDataForTable = (result: SparqlResult): TableData => {
 };
 
 export const headerMap: Record<string, string> = {
-    proj_img_url: 'Preview',
     name: 'Name',
-    src_license: 'Source License',
-    src_licensor: 'Source Licensor',
-    proj_license: 'Project License',
-    proj_licensor: 'Project Licensor',
-    proj_function: 'Project Function',
-    proj_documentation_language: 'Doc. Lang.',
-    proj_version: 'Vers.',
-    proj_technology_readiness_level: 'Readiness',
+    proj_function: 'Description',
+    proj_license: 'License',
+    proj_licensor: 'Author',
+    proj_documentation_language: 'Language',
+    proj_version: 'Release',
+    proj_technology_readiness_level: 'Tech. Readiness',
     proj_documentation_readiness_level: 'Doc. Readiness'
 };
 
