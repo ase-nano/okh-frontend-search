@@ -134,7 +134,7 @@ body {
 }
 
 .bg-image-full {
-  min-height: 1000%;
+  min-height: 100%;
   width: 100%;
   position: fixed;
   z-index: -1;
@@ -143,4 +143,5 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 0.5;
 }
