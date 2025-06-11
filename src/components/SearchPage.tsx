@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu.tsx";
 import { headerMap } from "@/helper/transform-functions.ts";
 import Header from "@/components/Header.tsx";
+import logoImgLight from '../assets/logos/ose_logo_icon.svg';
 
 const SearchPage: FC = () => {
     const navigate = useNavigate();
@@ -70,9 +71,9 @@ const SearchPage: FC = () => {
 
             <div className="container mx-auto">
                 <div className="p-6 max-w-2xl mx-auto" style={{paddingTop: "18rem"}}>
-                    <h1 className="text-5xl font-bold mb-6">OKH Search</h1>
+                    <div className="mb-6 mx-auto w-32"><img src={logoImgLight} width="250" alt ="OSE Logo" /></div>
 
-                    <form onSubmit={handleSubmit} className="mb-6">
+                    <form onSubmit={handleSubmit} className="mb-6 text-3xl">
                         <div className="flex">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
