@@ -13,6 +13,8 @@ import {
 import { headerMap } from "@/helper/transform-functions.ts";
 import Header from "@/components/Header.tsx";
 import logoImgLight from '../assets/logos/honeycomb-logo.svg';
+import { Checkbox } from "@/components/ui/checkbox.tsx";
+import { Label } from "@/components/ui/label.tsx";
 
 const SearchInputPage: FC = () => {
     const navigate = useNavigate();
@@ -20,6 +22,7 @@ const SearchInputPage: FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [selectedSearchColumn, setSelectedSearchColumn] = useState('name');
+    const [excludeThingiVerse, setExcludeThingiVerse] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -35,7 +38,7 @@ const SearchInputPage: FC = () => {
         setLoading(true);
 
         try {
-            const sparqlQuery = fetchGraph(selectedSearchColumn, query, false);
+            const sparqlQuery = fetchGraph(selectedSearchColumn, query, excludeThingiVerse);
             const fusekiEndpoint = 'https://okh-db.dev.opensourceecology.de/okh/sparql';
 
             const response = await fetch(fusekiEndpoint, {
@@ -114,6 +117,10 @@ const SearchInputPage: FC = () => {
                                 <Search />
                                 {loading ? 'Searching...' : 'Search'}
                             </Button>
+                        </div>
+                        <div className="flex items-center gap-3 mt-4">
+                            <Checkbox id="excludeThingiVerse" checked={excludeThingiVerse} onCheckedChange={(checked) => setExcludeThingiVerse(Boolean(checked))} />
+                            <Label htmlFor="excludeThingiVerse">Exclude ThingiVerse Data</Label>
                         </div>
                     </form>
 
