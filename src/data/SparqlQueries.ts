@@ -55,6 +55,20 @@ SELECT DISTINCT
   ?proj_img_url
   ?proj_release_url
 WHERE {
+    { ?src ods:primaryHost okhkrawl:dataProviderAppropedia }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderCodeberg }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGithub }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGitlab }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGitlabOpenSourceEcologyGermany }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderOshwa }
+    #  UNION
+    #  { ?src ods:primaryHost okhkrawl:dataProviderThingiverse }
+
   ?ds
     a ods:Dataset ;
     ods:hasSource ?src ;
