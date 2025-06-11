@@ -1,6 +1,22 @@
 import { QUERY_LIMIT_RESULTS } from "@/helper/configs.ts";
 
-export const fetchGraph = (selectedSearchColumn: string, projectName: string) => {
+const excludeThingiVerseClause = `
+{ ?src ods:primaryHost okhkrawl:dataProviderAppropedia }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderCodeberg }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGithub }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGitlab }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderGitlabOpenSourceEcologyGermany }
+      UNION
+      { ?src ods:primaryHost okhkrawl:dataProviderOshwa }
+    #  UNION
+    #  { ?src ods:primaryHost okhkrawl:dataProviderThingiverse }
+`;
+
+export const fetchGraph = (selectedSearchColumn: string, projectName: string, excludeThingiVerse: boolean) => {
     return `
 # SPDX-FileCopyrightText: 2025 Robin Vobruba <hoijui.quaero@gmail.com>
 #
@@ -55,19 +71,7 @@ SELECT DISTINCT
   ?proj_img_url
   ?proj_release_url
 WHERE {
-    { ?src ods:primaryHost okhkrawl:dataProviderAppropedia }
-      UNION
-      { ?src ods:primaryHost okhkrawl:dataProviderCodeberg }
-      UNION
-      { ?src ods:primaryHost okhkrawl:dataProviderGithub }
-      UNION
-      { ?src ods:primaryHost okhkrawl:dataProviderGitlab }
-      UNION
-      { ?src ods:primaryHost okhkrawl:dataProviderGitlabOpenSourceEcologyGermany }
-      UNION
-      { ?src ods:primaryHost okhkrawl:dataProviderOshwa }
-    #  UNION
-    #  { ?src ods:primaryHost okhkrawl:dataProviderThingiverse }
+    ${ excludeThingiVerse ? excludeThingiVerseClause : "" }
 
   ?ds
     a ods:Dataset ;

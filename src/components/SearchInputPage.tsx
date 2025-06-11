@@ -35,7 +35,7 @@ const SearchInputPage: FC = () => {
         setLoading(true);
 
         try {
-            const sparqlQuery = fetchGraph(selectedSearchColumn, query);
+            const sparqlQuery = fetchGraph(selectedSearchColumn, query, false);
             const fusekiEndpoint = 'https://okh-db.dev.opensourceecology.de/okh/sparql';
 
             const response = await fetch(fusekiEndpoint, {
