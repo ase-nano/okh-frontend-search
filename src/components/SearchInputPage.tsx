@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { fetchGraph } from '@/data/SparqlQueries';
 import { SparqlResult } from '@/models/SparqlResult';
 import { useNavigate } from 'react-router-dom';
-import { Funnel } from "lucide-react";
+import { Funnel, Search } from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator,
@@ -80,7 +80,7 @@ const SearchInputPage: FC = () => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button variant={"secondary"} size={"lg"}>
-                                        <Funnel size={20} strokeWidth={1}/>
+                                        <Funnel size={20} />
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -110,6 +110,7 @@ const SearchInputPage: FC = () => {
                                 variant={"secondary"}
                                 size={"lg"}
                                 disabled={loading}>
+                                <Search />
                                 {loading ? 'Searching...' : 'Search'}
                             </Button>
                         </div>

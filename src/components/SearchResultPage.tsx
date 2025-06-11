@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header.tsx";
 import SearchResultItem from "@/components/SearchResultItem.tsx";
 import SearchResultSidebar from "@/components/SearchResultSidebar.tsx";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 
 const SearchResultPage: FC = () => {
     const location = useLocation();
@@ -28,33 +29,29 @@ const SearchResultPage: FC = () => {
         return <div>Loading...</div>
     }
 
-    if (!data) {
-        return (
-            <div>
-                <p>No data available. Please search first.</p>
-                <Button onClick={() => navigate('/')}>Back to Search</Button>
-            </div>
-        )
-    }
-
     return (
         <>
             <Header />
             <div className="container mx-auto">
-                <div className="mb-6">
-                    <Button onClick={() => navigate('/')}>Back to Search</Button>
+                <div className="flex mb-12">
+                    <div className="w-1/2"><Button variant={"secondary"} onClick={() => navigate('/')}><ArrowLeft /> Back to Search</Button></div>
+                    <div className="w-1/2 text-right"><Button variant={"secondary"}>Create Manifest <ExternalLink /></Button></div>
                 </div>
 
-                <div className="flex">
-                    <div className="w-4/5 mr-6">
-                        {
-                            data.rows.map((row, index) => <SearchResultItem key={index} row={row} />)
-                        }
+                { (data) ? (
+                    <div className="flex">
+                        <div className="w-4/5 mr-6">
+                            {
+                                data.rows.map((row, index) => <SearchResultItem key={index} row={row} />)
+                            }
+                        </div>
+                        <div className="w-1/5 ml-6">
+                            <SearchResultSidebar resultLength={data.rows.length} requestDuration={requestDuration} />
+                        </div>
                     </div>
-                    <div className="w-1/5 ml-6">
-                        <SearchResultSidebar resultLength={data.rows.length} requestDuration={requestDuration} />
-                    </div>
-                </div>
+                ) : (
+                    <p>No data available. Please search first.</p>
+                ) }
             </div>
         </>
     );
