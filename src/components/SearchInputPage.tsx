@@ -76,15 +76,15 @@ const SearchInputPage: FC = () => {
             <Header/>
 
             <div className="container mx-auto">
-                <div className="p-6 max-w-2xl mx-auto" style={{paddingTop: "18rem"}}>
+                <div className="p-6 max-w-3xl mx-auto" style={{paddingTop: "18rem"}}>
                     <div className="mb-6 mx-auto w-32"><img src={logoImgLight} width="250" alt ="OSE Logo" /></div>
 
                     <form onSubmit={handleSubmit} className="mb-6">
                         <div className="flex">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
-                                    <Button variant={"secondary"} size={"lg"}>
-                                        <Funnel size={20} />
+                                    <Button variant={"secondary"} size={"lg"} className="text-2xl p-6.5">
+                                        <Funnel size={32} />
                                     </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -106,15 +106,16 @@ const SearchInputPage: FC = () => {
                                 type="text"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
-                                className="bg-background5 ml-2 mr-2 h-10"
+                                className="bg-background5 ml-2 mr-2 h-10 text-2xl p-6"
                                 placeholder="Enter search term..."/>
 
                             <Button
                                 type='submit'
                                 variant={"secondary"}
                                 size={"lg"}
-                                disabled={loading}>
-                                <Search />
+                                disabled={loading}
+                                className="text-xl p-6">
+                                <Search size={20} className="" />
                                 {loading ? 'Searching...' : 'Search'}
                             </Button>
                         </div>
